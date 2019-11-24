@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>签字版</title>
+</head>
+<body>
+<div id="canvasParcel" style="text-align: center">
+    <canvas id="canvas" width="800rem" height="300rem" style=" border: #333333 1px solid; text-align: center;"></canvas>
+</div>
+<!--<div id="canvasParcel" style="text-align: center;">-->
+<!--    <div>-->
+<!--        <canvas id="canvas" width="800rem" height="300rem" style="border: 1px dashed #ccc;"></canvas>-->
+<!--    </div>-->
+<!--&lt;!&ndash;    <button onclick="exportSignature(this)">确定</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button onclick="empty(this)">清空</button>&ndash;&gt;-->
+<!--</div>-->
+</body>
+<script>
+    const canvas=document.getElementById('canvas')
+    const ctx=canvas.getContext('2d')
+    var canvasX = canvas.getBoundingClientRect().left;// 画板的坐标x
+    var canvasY = canvas.getBoundingClientRect().top; // 画板的坐标y
+    console.log(canvasX+'画板的坐标x');
+    console.log(canvasY+'画板的坐标y');
+    ctx.fillStyle = "rgba(255, 255, 255, 0)";       // 画布背景色下
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    console.log(canvas.width+'宽度'+canvas.height+'签字版高度')
+    canvas.addEventListener('mousedown',mouseDown);
+    canvas.addEventListener('mousemove',mouseMove);
+    canvas.addEventListener('mouseup',mouseup)
+    var onoff = false;  // 锁定开关
+    var oldx = canvasX; // 起始坐标x
+    var oldy = canvasY; // 起始坐标y
+    var newx;           // 结束坐标x
+    var newy;           // 结束坐标y
+    function mouseDown(event) {
+        onoff = true;                   // 打开开关
+        oldx = event.clientX -canvasX;  // 鼠标在画板中点击的X的坐标
+        oldy = event.clientY -canvasY;  // 鼠标在画板中点击的Y的坐标
+        ctx.beginPath();            // 开始路径
+    }
+    function mouseMove(event) {
+        if (onoff) {
+            newx = event.clientX -canvasX;
+            newy = event.clientY -canvasY;
+            ctx.moveTo(oldx, oldy); // 线的起点坐标
+            ctx.lineTo(newx, newy); // 线的始点坐标
+            ctx.stroke();           // 初始化到画布中
+            oldx = newx;
+            oldy = newy;
+        }
+    }
+    function mouseup() {
+        onoff = false;      // 关闭开关
+        ctx.closePath();// 关闭路径
+    }
+</script>
+</html>

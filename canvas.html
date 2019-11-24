@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+<canvas id="test-canvas" width="200" heigth="100" style="border: #333333 1px solid">
+    <p>你的浏览器不支持Canvas</p>
+</canvas>
+
+</body>
+<script>
+    //获得canvas画布
+    const canvas = document.getElementById('test-canvas');
+    //获得画笔
+   let ctx= canvas.getContext('2d');
+   // ctx.clearRect(0,0,200,200);
+   ctx.fillStyle='#d8d8d8';
+   //画一个矩形
+   ctx.fillRect(0,0,130,130);
+   //画一条线段
+   ctx.moveTo(0,0);
+   ctx.lineTo(130,130);
+   ctx.stroke();
+   //画一个圆
+   //  ctx.beginPath();
+   //  ctx.arc(130,130,10,Math.PI/2,Math.PI);
+   //  ctx.stroke();
+    //写一个实体字
+    ctx.font="20px Arial"
+    ctx.fillStyle='#0a0a0a';
+    ctx.fillText('Hello',20,20)
+    //写一个空心的字
+    ctx.font="20px Arial"
+    ctx.fillStyle='#3d0c7b';
+    ctx.strokeText('Hello',30,50)
+    //清空画布
+    ctx.clearRect(0,0,130,130);
+    //创建线性渐变
+   const grd = ctx.createLinearGradient(0,0,130,130);
+    grd.addColorStop(0,'red');
+    grd.addColorStop(1,'white');
+    // grd.addColorStop(2,'blue');
+    ctx.fillStyle=grd;
+    // ctx.beginPath();
+    // ctx.arc(20,20,20,0,Math.PI*2);
+    // ctx.stroke();
+    ctx.fillRect(0,0,130,130);
+</script>
+</html>
