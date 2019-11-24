@@ -54,6 +54,17 @@
     function mouseup() {
         onoff = false;      // 关闭开关
         ctx.closePath();// 关闭路径
+        let date =canvas.toDataURL('image/png')
+        var dlLink = document.createElement('a');
+        dlLink.download = 'signature';
+        dlLink.href = date;
+        dlLink.dataset.downloadurl = ['image/png', dlLink.download, dlLink.href].join(':');
+
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+        console.info(date);
+        console.log(date)
     }
 </script>
 </html>
