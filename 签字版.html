@@ -8,6 +8,9 @@
 <div id="canvasParcel" style="text-align: center">
     <canvas id="canvas" width="800rem" height="300rem" style=" border: #333333 1px solid; text-align: center;"></canvas>
 </div>
+<div>
+    <img src="" id="img">
+</div>
 <!--<div id="canvasParcel" style="text-align: center;">-->
 <!--    <div>-->
 <!--        <canvas id="canvas" width="800rem" height="300rem" style="border: 1px dashed #ccc;"></canvas>-->
@@ -54,17 +57,20 @@
     function mouseup() {
         onoff = false;      // 关闭开关
         ctx.closePath();// 关闭路径
-        let date =canvas.toDataURL('image/png')
+        let img=document.getElementById('img')
+        let date =canvas.toDataURL('image/jpg',0.1)
         var dlLink = document.createElement('a');
         dlLink.download = 'signature';
         dlLink.href = date;
-        dlLink.dataset.downloadurl = ['image/png', dlLink.download, dlLink.href].join(':');
+        dlLink.dataset.downloadurl = ['image/jpeg', dlLink.download, dlLink.href].join(':');
 
         document.body.appendChild(dlLink);
         dlLink.click();
         document.body.removeChild(dlLink);
-        console.info(date);
+        // console.info(date);
         console.log(date)
+        img.src=date
+            console.log(img)
     }
 </script>
 </html>
